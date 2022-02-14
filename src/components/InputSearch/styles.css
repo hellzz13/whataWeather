@@ -1,0 +1,16 @@
+.list{
+    height: 10rem;
+    background-color: blueviolet;
+    overflow-y: auto;
+    width: 10rem;
+    margin: auto;
+    
+}
+
+.line-select{
+    cursor: pointer;
+    /* width: 12rem; */
+    /* border: solid red 1px; */
+    
+    list-style: none;
+}
