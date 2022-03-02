@@ -8,11 +8,9 @@ import "./styles.css";
 const InputSearch = () => {
   const [weather, setWeather] = useState<WeatherProps[]>([]);
   const [place, setPlace] = useState<PlaceProps[]>([]);
-  // const [cityValue, setCityValue] = useState<string>("");
 
   const { cityValue, setCityValue } = useContext(PlaceInfoContext);
 
-  // const [refresh, setRefresh] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const handleInputChange = (e: any) => {
     e.preventDefault();
