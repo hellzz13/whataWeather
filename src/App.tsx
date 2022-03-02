@@ -1,10 +1,13 @@
 import "./App.css";
+import ContainerApp from "./components/ContainerApp";
 import InputSearch from "./components/InputSearch";
 
 function App() {
   return (
     <div className="App">
-      <InputSearch />
+      <ContainerApp>
+        <InputSearch />
+      </ContainerApp>
     </div>
   );
 }

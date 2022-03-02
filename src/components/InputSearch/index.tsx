@@ -1,4 +1,5 @@
-import react, { useEffect, useState } from "react";
+import react, { useContext, useEffect, useState } from "react";
+import PlaceInfoContext from "../../context/placeInfo";
 import { PlaceProps } from "../../types/place";
 import { WeatherProps } from "../../types/weather";
 
@@ -7,7 +8,9 @@ import "./styles.css";
 const InputSearch = () => {
   const [weather, setWeather] = useState<WeatherProps[]>([]);
   const [place, setPlace] = useState<PlaceProps[]>([]);
-  const [cityValue, setCityValue] = useState<string>("");
+  // const [cityValue, setCityValue] = useState<string>("");
+
+  const { cityValue, setCityValue } = useContext(PlaceInfoContext);
 
   // const [refresh, setRefresh] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -41,15 +44,15 @@ const InputSearch = () => {
       <input
         type="text"
         onChange={(e) => {
-          handleInputChange(e);
-          // setTimeout(() => handleInputChange(e), 200);
+          // handleInputChange(e);
+          setTimeout(() => handleInputChange(e), 200);
           setCityValue(e.target.value);
         }}
-        value={cityValue}
-        // onBlur={() => setIsActive(false)}
+        value={cityValue && cityValue}
+        placeholder="Ex. Sao Paulo"
       />
       {isActive && (
-        <ul className="list">
+        <ul>
           {place?.map((value, index) => (
             <li
               key={index + value.value}
@@ -59,6 +62,7 @@ const InputSearch = () => {
                 setTimeout(() => setIsActive(false), 200);
                 setPlace([]);
               }}
+              // onBlur={() => setIsActive(false)}
             >
               {value.value}
             </li>
@@ -66,7 +70,7 @@ const InputSearch = () => {
         </ul>
       )}
       <div>
-        {isActive === false && cityValue
+        {!!!isActive && !!cityValue
           ? weather &&
             weather.map((value) => (
               <p>
