@@ -7,9 +7,10 @@ import "./styles.css";
 const InputSearch = () => {
   const [weather, setWeather] = useState<WeatherProps[]>([]);
   const [place, setPlace] = useState<PlaceProps[]>([]);
+  const [cityValue, setCityValue] = useState<string>("");
+
+  // const [refresh, setRefresh] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [refrash, setRefrash] = useState<boolean>(false);
-  const [cityValue, setCityValue] = useState<string>();
   const handleInputChange = (e: any) => {
     e.preventDefault();
     const { value } = e.target;
@@ -20,7 +21,6 @@ const InputSearch = () => {
     fetch(url)
       .then((response) => response.json())
       .then((res) => setPlace([...place, res.nearest_area[0].region[0]]));
-
     setIsActive(true);
   };
 
@@ -30,31 +30,34 @@ const InputSearch = () => {
     fetch(url)
       .then((response) => response.json())
       .then((res) => setWeather(res.current_condition));
-  }, [refrash]);
+  }, [cityValue]);
 
-  console.log(place, "informações temperatura");
+  console.log(place, "Locais");
+  console.log(cityValue, "Local selecionado");
   return (
     <div>
       <h1>Digite sua cidade</h1>
-      {/* <label>Digite Sua cidade</label> */}
+
       <input
         type="text"
         onChange={(e) => {
-          setTimeout(() => handleInputChange(e), 1);
+          handleInputChange(e);
+          // setTimeout(() => handleInputChange(e), 200);
           setCityValue(e.target.value);
         }}
-        onBlur={() => setTimeout(() => setIsActive(false), 200)}
-        onClick={(e)=>setCityValue(e.currentTarget.value)} //verificar
-        value={cityValue && cityValue}
+        value={cityValue}
+        // onBlur={() => setIsActive(false)}
       />
       {isActive && (
         <ul className="list">
-          {place?.map((value) => (
+          {place?.map((value, index) => (
             <li
+              key={index + value.value}
               className="line-select"
               onClick={() => {
                 setCityValue(value.value);
-                setRefrash(!refrash);
+                setTimeout(() => setIsActive(false), 200);
+                setPlace([]);
               }}
             >
               {value.value}
@@ -63,13 +66,15 @@ const InputSearch = () => {
         </ul>
       )}
       <div>
-        {isActive === false && cityValue  &&
-          weather?.map((value) => (
-            <p>
-              temperatura: {value.FeelsLikeC} ºC - data/hora:{" "}
-              {value.localObsDateTime}
-            </p>
-          ))}
+        {isActive === false && cityValue
+          ? weather &&
+            weather.map((value) => (
+              <p>
+                temperatura: {value.temp_C} ºC - data/hora:{" "}
+                {value.localObsDateTime}
+              </p>
+            ))
+          : ""}
       </div>
     </div>
   );
