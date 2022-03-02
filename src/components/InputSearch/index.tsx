@@ -44,8 +44,8 @@ const InputSearch = () => {
       <input
         type="text"
         onChange={(e) => {
-          // handleInputChange(e);
-          setTimeout(() => handleInputChange(e), 200);
+          handleInputChange(e);
+          // setTimeout(() => handleInputChange(e), 200);
           setCityValue(e.target.value);
         }}
         value={cityValue && cityValue}
