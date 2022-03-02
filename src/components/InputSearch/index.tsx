@@ -53,20 +53,23 @@ const InputSearch = () => {
       />
       {isActive && (
         <ul>
-          {place?.map((value, index) => (
-            <li
-              key={index + value.value}
-              className="line-select"
-              onClick={() => {
-                setCityValue(value.value);
-                setTimeout(() => setIsActive(false), 200);
-                setPlace([]);
-              }}
-              // onBlur={() => setIsActive(false)}
-            >
-              {value.value}
-            </li>
-          ))}
+          {place?.map(
+            (value, index) =>
+              value.value !== "" && (
+                <li
+                  key={index + value.value}
+                  className="line-select"
+                  onClick={() => {
+                    setCityValue(value.value);
+                    setTimeout(() => setIsActive(false), 200);
+                    setPlace([]);
+                  }}
+                  // onBlur={() => setIsActive(false)}
+                >
+                  {value.value}
+                </li>
+              )
+          )}
         </ul>
       )}
       <div>
