@@ -6,14 +6,15 @@ import { WeatherProps } from "../../types/weather";
 import { BiSearchAlt2 } from "react-icons/bi";
 
 import "./styles.css";
+import { Link } from "react-router-dom";
 
 const InputSearch = () => {
-  const [weather, setWeather] = useState<WeatherProps[]>([]);
+  // const [weather, setWeather] = useState<WeatherProps[]>([]);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const [place, setPlace] = useState<PlaceProps[]>([]);
 
   const { cityValue, setCityValue } = useContext(PlaceInfoContext);
 
-  const [isActive, setIsActive] = useState<boolean>(false);
   const handleInputChange = (e: any) => {
     e.preventDefault();
     const { value } = e.target;
@@ -27,13 +28,13 @@ const InputSearch = () => {
     setIsActive(true);
   };
 
-  useEffect(() => {
-    const url = `https://wttr.in/${cityValue}?format=j1`;
-    //fetch weather
-    fetch(url)
-      .then((response) => response.json())
-      .then((res) => setWeather(res.current_condition));
-  }, [cityValue]);
+  // useEffect(() => {
+  //   const url = `https://wttr.in/${cityValue}?format=j1`;
+  //   //fetch weather
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((res) => setWeather(res.current_condition));
+  // }, [cityValue]);
 
   console.log(place, "Locais");
   console.log(cityValue, "Local selecionado");
@@ -41,9 +42,11 @@ const InputSearch = () => {
     <div>
       <h1>Digite sua cidade</h1>
       <div className="container-input">
-        <label htmlFor="" className="button-search">
-          <BiSearchAlt2 color="white" size={30} />
-        </label>
+        <Link to={"weather"}>
+          <label htmlFor="" className="button-search">
+            <BiSearchAlt2 color="white" size={30} />
+          </label>
+        </Link>
         <input
           type="text"
           onChange={(e) => {
@@ -76,7 +79,7 @@ const InputSearch = () => {
           )}
         </ul>
       )}
-      <div>
+      {/* <div>
         {!!!isActive && !!cityValue
           ? weather &&
             weather.map((value) => (
@@ -86,7 +89,7 @@ const InputSearch = () => {
               </p>
             ))
           : ""}
-      </div>
+      </div> */}
     </div>
   );
 };
