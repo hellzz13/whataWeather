@@ -3,6 +3,8 @@ import PlaceInfoContext from "../../context/placeInfo";
 import { PlaceProps } from "../../types/place";
 import { WeatherProps } from "../../types/weather";
 
+import { BiSearchAlt2 } from "react-icons/bi";
+
 import "./styles.css";
 
 const InputSearch = () => {
@@ -38,17 +40,21 @@ const InputSearch = () => {
   return (
     <div>
       <h1>Digite sua cidade</h1>
-
-      <input
-        type="text"
-        onChange={(e) => {
-          handleInputChange(e);
-          // setTimeout(() => handleInputChange(e), 200);
-          setCityValue(e.target.value);
-        }}
-        value={cityValue && cityValue}
-        placeholder="Ex. Sao Paulo"
-      />
+      <div className="container-input">
+        <label htmlFor="" className="button-search">
+          <BiSearchAlt2 color="white" size={30} />
+        </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            handleInputChange(e);
+            // setTimeout(() => handleInputChange(e), 200);
+            setCityValue(e.target.value);
+          }}
+          value={cityValue && cityValue}
+          placeholder="Ex. Sao Paulo"
+        />
+      </div>
       {isActive && (
         <ul>
           {place?.map(
