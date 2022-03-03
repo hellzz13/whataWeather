@@ -1,10 +1,9 @@
 import "./styles.css";
-import ContainerApp from "../../components/ContainerApp";
-import InputSearch from "../../components/InputSearch";
-import Logo from "../../assets/logo_whataweather.svg";
 import { useContext, useEffect, useState } from "react";
 import PlaceInfoContext from "../../context/placeInfo";
 import { WeatherProps } from "../../types/weather";
+
+import { ImLocation2 } from "react-icons/im";
 
 export function Weather() {
   const { cityValue, setCityValue } = useContext(PlaceInfoContext);
@@ -22,13 +21,16 @@ export function Weather() {
   return (
     <>
       <h1>Temperatura</h1>
+      <h3>
+        <ImLocation2 size={13} /> Local: {cityValue}
+      </h3>
       <div>
         {weather &&
           weather.map((value) => (
-            <p>
-              temperatura: {value.temp_C} ºC - data/hora:{" "}
-              {value.localObsDateTime}
-            </p>
+            <>
+              <h3 className="temp-value">{value.temp_C} ºC</h3>
+              <h4>{value.localObsDateTime}</h4>
+            </>
           ))}
       </div>
     </>
