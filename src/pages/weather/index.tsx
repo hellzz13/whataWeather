@@ -15,9 +15,8 @@ export function Weather() {
     const history = useHistory();
 
     useEffect(() => {
-        if (!cityValue) {
-            history.push("/");
-        }
+        if (!cityValue) return history.push("/");
+
         const weatherUrl = `https://wttr.in/${cityValue}?format=j1`;
         fetch(weatherUrl)
             .then((response) => response.json())
