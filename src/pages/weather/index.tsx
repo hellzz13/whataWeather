@@ -3,20 +3,18 @@ import "./styles.css";
 import { useContext, useEffect, useState } from "react";
 import { WeatherProps } from "../../types/weather";
 import { ImLocation2 } from "react-icons/im";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import PlaceInfoContext from "../../context/placeInfo";
 import CloudLoading from "../../assets/cloudloading.gif";
 
 export function Weather() {
-    const { cityValue, setCityValue } = useContext(PlaceInfoContext);
+    const { cityValue } = useContext(PlaceInfoContext);
     const [weather, setWeather] = useState<WeatherProps[]>([]);
 
-    const history = useHistory();
+    if (!cityValue) return <Redirect to={"/"} />;
 
     useEffect(() => {
-        if (!cityValue) return history.push("/");
-
         const weatherUrl = `https://wttr.in/${cityValue}?format=j1`;
         fetch(weatherUrl)
             .then((response) => response.json())

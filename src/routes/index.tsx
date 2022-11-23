@@ -4,12 +4,12 @@ import { Home } from "../pages/home";
 import { Weather } from "../pages/weather";
 
 export const Routes: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route component={Home} path="/" exact />
-        <Route component={Weather} path="/weather" />
-      </Switch>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route component={Home} path="/" exact />
+                <Route component={Weather} path="/weather" />
+            </Switch>
+        </BrowserRouter>
+    );
 };
