@@ -3,11 +3,11 @@ import React, { createContext, useState } from "react";
 // tipando props do contexto
 type PlaceInfoContextProps = {
     cityValue: string | undefined;
-    setCityValue: (state: string) => void;
+    setCityValue: (state: any) => void;
 };
 
 const DEFAULT_VALUE = {
-    cityValue: "",
+    cityValue: undefined,
     setCityValue: () => {},
 };
 
