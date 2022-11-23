@@ -2,33 +2,31 @@ import React, { createContext, useState } from "react";
 
 // tipando props do contexto
 type PlaceInfoContextProps = {
-  cityValue: string | undefined;
-  setCityValue: any; //verify
+    cityValue: string | undefined;
+    setCityValue: (state: string) => void;
 };
 
-// valor default do contexto
-
 const DEFAULT_VALUE = {
-  cityValue: undefined,
-  setCityValue: () => {},
+    cityValue: "",
+    setCityValue: () => {},
 };
 
 // criando nosso contexto UserContext
 const PlaceInfoContext = createContext<PlaceInfoContextProps>(DEFAULT_VALUE);
 
 const PlaceInfoContextProvider: React.FC = ({ children }) => {
-  const [cityValue, setCityValue] = useState(DEFAULT_VALUE.cityValue);
+    const [cityValue, setCityValue] = useState(DEFAULT_VALUE.cityValue);
 
-  return (
-    <PlaceInfoContext.Provider
-      value={{
-        cityValue,
-        setCityValue,
-      }}
-    >
-      {children}
-    </PlaceInfoContext.Provider>
-  );
+    return (
+        <PlaceInfoContext.Provider
+            value={{
+                cityValue,
+                setCityValue,
+            }}
+        >
+            {children}
+        </PlaceInfoContext.Provider>
+    );
 };
 
 export { PlaceInfoContextProvider };

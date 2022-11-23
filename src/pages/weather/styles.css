@@ -1,3 +1,15 @@
 .temp-value {
   font-size: xx-large;
 }
+
+.containerLoading{
+  padding: 50px;
+  width: 100%;
+  /* height: 100vh; */
+  font-size: flex;
+}
+
+img{
+  align-items: center;
+  justify-content: center;
+}

@@ -1,8 +1,3 @@
-export interface PlaceProps 
-// {
-//   region: [
-    {
-      value: string;
-    }
-//   ];
-// }
+export interface PlaceProps {
+    value: string;
+}
